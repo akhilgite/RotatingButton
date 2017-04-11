@@ -356,17 +356,7 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 			mProgressPaint.setStrokeCap(Paint.Cap.ROUND);
 		}
 
-		/*scale image*/
-//		reDrawnBitmap=BitmapFactory.decodeResource(getResources(),R.drawable.rotoron);
-		/*float scaleWidth = ((float) mArcRect.width()) / bmp.getWidth();
-		float scaleHeight = ((float) mArcRect.height()) / bmp.getHeight();
-		Matrix matrix1 = new Matrix();
-		matrix1.postScale(scaleWidth, scaleHeight);
 
-
-		reDrawnBitmap=Bitmap.createBitmap(bmp,0,0,bmp.getWidth(),bmp.getHeight(),matrix1,true);*/
-
-//		reDrawnBitmap=bmp;
 		myCountDownTimer  = new MyCountDownTimer(100,10);
 		gestureDetector = new GestureDetector(context, this);
 	}
@@ -395,18 +385,12 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 		// Draw the arcs
 		final int arcStart = mStartAngle + mAngleOffset + mRotation;
 		final int arcSweep = mSweepAngle;
-		//canvas.drawRect(mArcRect,mArcPaint);
-		//canvas.drawArc(mArcRect, arcStart, arcSweep, false, mArcPaint);
-
-
 
 		if (mProgress==0)
 			mProgressSweep=1;
 		canvas.drawArc(mArcRect, arcStart, mProgressSweep, false,
 				mProgressPaint);
 
-
-//		Bitmap bmp= BitmapFactory.decodeResource(getResources(),R.drawable.rotoroff);
 		int bmp_width=reDrawnBitmap.getWidth();
 		int bmp_height=reDrawnBitmap.getHeight();
 
@@ -417,20 +401,7 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 		float img_y=center_y-bmp_height/2;
 		Log.e(TAG,"Bmp Width w ,h "+bmp_width+" "+bmp_height);
 
-
-
-		//canvas.drawBitmap(bmp,mArcRect,mArcRect,mProgressPaint);
-		//Rect rectF=new Rect((int)mArcRect.left+10,(int)mArcRect.top+10,(int)mArcRect.right,(int)mArcRect.bottom);
-//		canvas.translate(img_x,img_y);
-//		canvas.drawRect(new RectF(img_x,img_y,bmp_width,bmp_height),mArcPaint);
-//		canvas.translate(-img_x,-img_y);0
-
-		//Bitmap.createBitmap(reDrawnBitmap,0,0,reDrawnBitmap.getWidth(),reDrawnBitmap.getHeight(),matrix1,true);
 		canvas.drawBitmap(reDrawnBitmap,img_x,img_y,mProgressPaint);
-
-
-
-		//canvas.drawBitmap(BitmapFactory.decodeResource(getResources(),R.drawable.bsae2),mArcRect.left-15,mArcRect.top-15,mProgressPaint);
 
 		Paint textPaint = new Paint();
 		textPaint.setARGB(200, 0, 0, 0);
@@ -445,8 +416,6 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 		if(mEnabled) {
 			// Draw the thumb nail
 			canvas.translate(mTranslateX - mThumbXPos, mTranslateY - mThumbYPos);
-//			mThumb.draw(canvas);
-			//canvas.translate(-(mTranslateX - mThumbXPos), -(mTranslateY - mThumbYPos));
 		}
 
 
@@ -486,22 +455,6 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 		
 		setTouchInSide(mTouchInside);
 
-//		if(reDrawnBitmap == null) {
-//			Bitmap original = BitmapFactory.decodeResource(getResources(),R.drawable.rotoron);
-//			reDrawnBitmap = Bitmap.createScaledBitmap(original,(int)(mArcRect.width()-10),(int)(mArcRect.height()-10),false);
-//
-//		}
-
-		/*scale image*/
-		/*Bitmap bmp=BitmapFactory.decodeResource(getResources(),R.drawable.rotoron);
-		int scaleWidth = ((int) mWidth) / bmp.getWidth();
-		int scaleHeight = ((int) mHeight) / bmp.getHeight();
-		Matrix matrix1 = new Matrix();
-		matrix1.postScale(scaleWidth, scaleHeight);
-		reDrawnBitmap=Bitmap.createBitmap(bmp,0,0,bmp.getWidth(),bmp.getHeight(),matrix1,true);*/
-
-		//reDrawnBitmap=Bitmap.createScaledBitmap(reDrawnBitmap,(int)scaleWidth,(int)scaleHeight,false);
-
 		Bitmap bmp=BitmapFactory.decodeResource(getResources(),R.drawable.bsae2);
 		Matrix matrix2 = new Matrix();
 		// resize the bit map
@@ -525,38 +478,6 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 	private boolean isMoved=false;
 	@Override
 	public boolean onTouchEvent(MotionEvent event) {
-		/*if (mEnabled) {
-			gestureDetector.onTouchEvent(event);
-			this.getParent().requestDisallowInterceptTouchEvent(true);
-
-			switch (event.getAction()) {
-				case MotionEvent.ACTION_DOWN:
-
-
-					break;
-				case MotionEvent.ACTION_MOVE:
-					isMoved=true;
-					updateOnTouch(event);
-					break;
-				case MotionEvent.ACTION_UP:
-					if (isMoved) {
-						*//*onStopTrackingTouch();
-						setPressed(false);
-						this.getParent().requestDisallowInterceptTouchEvent(false);
-						isMoved=false;*//*
-					}
-					break;
-				case MotionEvent.ACTION_CANCEL:
-					onStopTrackingTouch();
-					setPressed(false);
-					this.getParent().requestDisallowInterceptTouchEvent(false);
-					break;
-			}
-			return true;
-		}else {
-			if (gestureDetector.onTouchEvent(event)) return true;
-			else return super.onTouchEvent(event);
-		}*/
 
 		if (isVibrating) {
 			Log.e(TAG, "onTouchEvent: isVibrating true" + mProgress);
@@ -612,7 +533,6 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 
 
 		onProgressRefresh(progress, true);
-		//updateRotation(mAngleDown);
 	}
 
 	private float cartesianToPolar(float x, float y) {
@@ -628,15 +548,6 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 		if (touchRadius < mTouchIgnoreRadius) {
 			ignore = true;
 		}
-
-		/*int currentProgress=getProgress();
-		if (xPos<currentProgress+15 &&xPos>currentProgress-15 && yPos<currentProgress+15&& yPos>currentProgress-15){
-
-		}else {
-			ignore=true;
-		}*/
-
-
 		return ignore;
 	}
 
@@ -852,51 +763,13 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 
 	Bitmap reDrawnBitmap;
 	private void updateRotation(double deg){
-		/*float newRot=new Float(rot);
-		Bitmap bitmap=BitmapFactory.decodeResource(getResources(),R.drawable.rotoron);
-		Matrix matrix=new Matrix();
-		matrix.postRotate(newRot,bitmap.getWidth(),bitmap.getHeight());
-		reDrawnBitmap=Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
-		invalidate();*/
+
 		Log.e(TAG,"Degree "+ deg);
 		if (deg < 0) {
-//			Log.e(TAG, "onScroll: rotDegrees < 0::"+rotDegrees);
 			deg = 360 + deg;
 		}
 		if (deg >= 210 || deg <= 150) {
 			if (deg > 180) deg = deg - 360;
-//			Matrix matrix=new Matrix();
-//			Bitmap bitmap=BitmapFactory.decodeResource(getResources(),R.drawable.rotoron);
-//			matrix.postRotate((float) deg, getWidth()/2, getHeight()/2); // 210/2,210/2);//
-			//matrix.setRectToRect(new RectF(0, 0, reDrawnBitmap.getWidth(), reDrawnBitmap.getHeight()), new RectF(0, 0, getMeasuredWidth(), getMeasuredHeight()), Matrix.ScaleToFit.CENTER);
-//			matrix.postRotate((float) deg);
-//			reDrawnBitmap=Bitmap.createBitmap(bitmap,0,0,bitmap.getWidth(),bitmap.getHeight(),matrix,true);
-//			reDrawnBitmap = Bitmap.createScaledBitmap(reDrawnBitmap,(int)mArcRect.width(),(int)mArcRect.height(),false);
-			/*int origWidth = reDrawnBitmap.getWidth();
-			int origHeight = reDrawnBitmap.getHeight();
-
-			final int destWidth = (int) (mArcRect.width()-mArcWidth);
-			if(origWidth > destWidth){
-				// picture is wider than we want it, we calculate its target height
-				int destHeight = origHeight/( origWidth / destWidth ) ;
-				// we create an scaled bitmap so it reduces the image, not just trim it
-				Bitmap b2 = Bitmap.createScaledBitmap(reDrawnBitmap, destWidth, destHeight, false);
-				reDrawnBitmap=b2;
-			}*/
-
-
-			/*Bitmap bmp=reDrawnBitmap;
-			float scaleWidth = ((float) mArcRect.width()) / bmp.getWidth();
-			float scaleHeight = ((int) mArcRect.height()) / bmp.getHeight();
-			Matrix matrix1 = new Matrix();
-			matrix1.postScale(scaleWidth, scaleHeight);
-			//reDrawnBitmap=Bitmap.createBitmap(bmp,0,0,bmp.getWidth(),bmp.getHeight(),matrix1,true);
-			reDrawnBitmap=Bitmap.createScaledBitmap(reDrawnBitmap,Math.round(scaleWidth),Math.round(scaleHeight),false);*/
-
-			//reDrawnBitmap=Bitmap.createScaledBitmap(reDrawnBitmap, getMeasuredWidth(), getMeasuredHeight(), false);
-			//ivRotor.setImageMatrix(matrix);
-
-
 
 			Bitmap bitmapOrg=BitmapFactory.decodeResource(getResources(),R.drawable.knob1);
 			int width = bitmapOrg.getWidth();
@@ -914,14 +787,11 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 			// resize the bit map
 			matrix.postScale(scaleWidth, scaleHeight);
 			// rotate the Bitmap
-//			matrix.preScale(scaleWidth,scaleHeight);
 			matrix.postRotate((float) deg);
 
 			// recreate the new Bitmap
 			reDrawnBitmap = Bitmap.createBitmap(bitmapOrg, 0, 0,
 					width, height, matrix, true);
-
-
 
 			invalidate();
 		}
@@ -943,7 +813,6 @@ public class SeekArc extends View implements GestureDetector.OnGestureListener{
 		@Override
 		public void onFinish() {
 			isVibrating = false;
-			Log.e(TAG, "onFinish: Timer completed");
 		}
 	}
 }

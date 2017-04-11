@@ -17,31 +17,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".VibratorActivity">
-            <!--<intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
-        </activity>
-        <activity
-            android:name=".seekbar.SimpleActivity"
-            android:label="" >
-        </activity>
-
-        <activity
-            android:name=".seekbar.ScrollViewActivity"
-            android:label="" >
-        </activity>
-
-        <activity
-            android:name=".seekbar.DisabledActivity"
-            android:label="" >
-        </activity>
-        <activity
-            android:name=".seekbar.CustomActivity"
-            android:label="" >
-        </activity>
     </application>
 
 </manifest>
